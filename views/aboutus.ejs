@@ -3,7 +3,6 @@
 
 <head>
   <meta charset="utf-8">
-  <meta charset="utf-8">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
@@ -12,13 +11,26 @@
   <meta name="msapplication-TileColor" content="#da532c">
   <meta name="theme-color" content="#ffffff">
   <title><%= title %></title>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-  <script src='/javascripts/js.js'></script>
+  <link rel='stylesheet' href='/stylesheets/aboutus.css' />
+  <script src="/javascripts/cursor_particles.js"></script>
 </head>
 
 <body>
-  <h1><%= title %></h1>
-  <p>Welcome to <%= title %></p>
+  <div class="center">
+
+    <div class="titleblock">
+      <img class="logo" src="/images/favicon/android-chrome-512x512.png" />
+      <div class="title">Perfect Grandkid</div>
+    </div>
+
+    <div class="contributors">
+      Contributors:
+      <a href="files/resume_ChenMiffy.pdf">Miffy Chen</a>, 
+      <a href="file/Anna Mun resume 1-31-19.pdf">Anna Mun</a>, 
+      <a href="file/Qing_Zhao_Resume.pdf" class="isDisabled">Cici Chen</a>
+    </div>
+
+  </div>
 </body>
 
 </html>

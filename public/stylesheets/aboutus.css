@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css?family=Baloo+Chettan');
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+.center {
+    margin: 0;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+}
+
+.titleblock {
+    text-align: center;
+}
+
+.logo {
+    width: 10%;
+    height: auto;
+    display: inline-block;
+    padding-right: 20px;
+}
+
+.title {
+    position: relative;
+    top: 50%;
+    transform: translateY(-65%);
+    display: inline-block;
+    font-family: "Baloo Chettan";
+    font-size: 3em;
+}
+
+.contributors {
+    font-family: "Noto Sans CJK TC Regular", "Noto Sans", sans-serif;
+    text-align: center;
+    line-height: 500%;
+    font-size: 1.3em;
+}
