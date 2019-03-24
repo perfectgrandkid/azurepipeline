@@ -2,18 +2,20 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <title><%= title %></title>
+  <% include ../views/partials/head %>
   <link rel='stylesheet' href='/stylesheets/ioschat.css' />
   <script src='/javascripts/jquery_v3.2.1.js'></script>
   <script src="/javascripts/ioschat.js"></script>
 </head>
 
 <body>
+  <header>
+    <% include ../views/partials/header %>
+  </header>
+  
   <h1><%= title %></h1>
 
   <div class="chat_container">
-
 
     <div class="chat">
 
