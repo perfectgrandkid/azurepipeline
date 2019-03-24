@@ -2,20 +2,16 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
-  <link rel="manifest" href="/images/favicon/site.webmanifest">
-  <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
-  <meta name="msapplication-TileColor" content="#da532c">
-  <meta name="theme-color" content="#ffffff">
-  <title><%= title %></title>
+  <% include ../views/partials/head %>
   <link rel='stylesheet' href='/stylesheets/aboutus.css' />
   <script src="/javascripts/cursor_particles.js"></script>
 </head>
 
 <body>
+  <header>
+    <% include ../views/partials/header %>
+  </header>
+
   <div class="center">
 
     <div class="titleblock">
@@ -25,12 +21,17 @@
 
     <div class="contributors">
       Contributors:
-      <a href="files/resume_ChenMiffy.pdf">Miffy Chen</a>, 
-      <a href="file/Anna Mun resume 1-31-19.pdf">Anna Mun</a>, 
-      <a href="file/Qing_Zhao_Resume.pdf" class="isDisabled">Cici Chen</a>
+      <a href="files/resume_ChenMiffy.pdf" target="_blank">Miffy Chen</a>,
+      <a href="files/resume_MunAnna.pdf" target="_blank">Anna Mun</a>,
+      <a href="files/resume_ChenCici.pdf" target="_blank">Cici Chen</a>
     </div>
 
   </div>
+
+  <!-- <footer>
+    <% include ../views/partials/footer %>
+  </footer> -->
+
 </body>
 
 </html>
