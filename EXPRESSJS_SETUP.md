@@ -43,4 +43,4 @@ $ npm start
 
 1. /views: [pagename].ejs
 2. /routes: [pagename].js
-3. app.js: add new `var [pagename]Router = require('./routes/template');` & `app.use('/[pagename]', [pagename]Router);`
+3. app.js: add `var [pagename]Router = require('./routes/[pagename]');` & `app.use('/[pagename]', [pagename]Router);`
