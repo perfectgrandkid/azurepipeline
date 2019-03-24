@@ -1,0 +1,17 @@
+# First stage of multi-stage build
+FROM node:boron
+WORKDIR /app
+
+# copy the contents of agent working directory on host to workdir in container
+COPY . .
+
+# dotnet commands to build, and publish
+RUN npm install
+
+# Second stage - Build runtime image
+FROM node:boron
+WORKDIR /app
+COPY . .
+RUN npm install
+EXPOSE 3000 80
+CMD ["npm", "start"]
