@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title><%= title %></title>
+  <link rel='stylesheet' href='/stylesheets/ioschat.css' />
+</head>
+
+<body>
+  <h1><%= title %></h1>
+
+  <div class="chat_container">
+
+
+    <div class="chat">
+
+      <div class="mine messages">
+        <div class="message last">
+          I'm bored
+        </div>
+      </div>
+
+      <div class="yours messages">
+        <div class="message">
+          Hi grandma!
+        </div>
+        <div class="message last">
+          How's your day going?
+        </div>
+      </div>
+
+      <div class="mine messages">
+        <div class="message">
+          It's going well!
+        </div>
+        <div class="message">
+          How is your day?
+        </div>
+        <div class="message last">
+          Have you eaten anything yet?
+        </div>
+      </div>
+
+      <div class="yours messages">
+        <div class="message">
+          Not yet, can you whip something up for me?
+        </div>
+        <div class="message last">
+          I will be home in 10 minutes!
+        </div>
+      </div>
+
+    </div>
+
+    <div class="chat__form">
+      <form id="chat__form">
+        <input id="text-message" type="text" placeholder="Type your message here...">
+        <button id="send" type="submit">↑</button>
+      </form>
+    </div>
+
+  </div>
+
+  <div id="result"></div>
+
+  <script src='/javascripts/jquery_v3.2.1.js'></script>
+  <script src="/javascripts/ioschat.js"></script>
+
+</body>
+
+</html>
