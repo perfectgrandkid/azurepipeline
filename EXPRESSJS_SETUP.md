@@ -38,3 +38,9 @@ $ cd expressjsapp
 $ npm install
 $ npm start
 ```
+
+### Adding additional webpages
+
+1. /views: [pagename].ejs
+2. /routes: [pagename].js
+3. app.js: add new `var [pagename]Router = require('./routes/template');` & `app.use('/[pagename]', [pagename]Router);`
