@@ -32,7 +32,7 @@
     "ejs": "~2.5.7",
     "express": "^4.16.4",
     "http-errors": "~1.6.2",
-    "jsonwebtoken": "^7.4.1",
+    "jsonwebtoken": "^8.5.1",
     "morgan": "~1.9.0",
     "node-hot-loader": "^1.12.3",
     "request": "^2.81.0",
