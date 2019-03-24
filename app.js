@@ -64,7 +64,7 @@ app.get('/chatBot',  function(req, res) {
   const options = {
       method: 'POST',
       // 'https://directline.botframework.com/v3/directline/tokens/generate',
-      uri: 'https://perfectgrandkid2019.azurewebsites.net',
+      uri: 'https://perfectgkid2019.azurewebsites.net',
       headers: {
           // WEBCHAT_SECRET
           'Authorization': 'Bearer ' + process.env.AHNyJNC0UCU.LX5qOGekXa4.Dmk3sBfQcZ2IAgjK2WsW4mOFnSb-EV5nDZHzV2MjC18
