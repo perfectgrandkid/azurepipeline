@@ -1,12 +1,13 @@
 .chatbot {
     margin: auto;
+    margin-top: -1%;
     min-width: 40%;
     max-width: 60%;
 }
 
 .chatbot iframe {
     width: 100%;
-    height: 400px;
+    height: 600px;
     /* border: none; */
     text-align: center;
 }

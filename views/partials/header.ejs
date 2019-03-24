@@ -1,42 +1,29 @@
-<style>
-    .navbar * {
-        display: inline;
-    }
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-    .navbar {
-        background-color: #b5b5b5;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 50px;
-        display: flex;
-        align-items: center;
-        box-shadow: 0 0 25px 0 black;
-    }
-
-    .navbar li {
-        margin: 20px;
-    }
-
-    .navbar li a {
-        color: black;
-        text-decoration: none;
-        text-transform: uppercase;
-    }
-
-    .navbar img {
-        margin-left: 2%;
-        height: 40px;
-    }
-</style>
-
-<div class="navbar">
-    <img src="/images/eldercouple_outline.svg" style=""></img>
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/aboutus">About Us</a></li>
-        <li><a href="/ioschat">iOS Chat</a></li>
-    </ul>
+<!-- Sidebar -->
+<div class="w3-sidebar w3-bar-block w3-animate-left" style="display:none;z-index:5" id="mySidebar">
+  <button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Close &times;</button>
+  <a href="/"><img src="/images/favicon/mstile-70x70.png"></a>
+  <a href="/aboutus" class="w3-bar-item w3-button">About Us</a>
+  <a href="/armodel" class="w3-bar-item w3-button">AR Model</a>
+  <a href="/ioschat" class="w3-bar-item w3-button">iOS Chat UI</a>
 </div>
-<br />
+
+<!-- Page Content -->
+<div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
+
+<div>
+  <button class="w3-button w3-white w3-xxlarge" onclick="w3_open()">&#9776;</button>
+</div>
+     
+<script>
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("myOverlay").style.display = "block";
+}
+
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("myOverlay").style.display = "none";
+}
+</script>

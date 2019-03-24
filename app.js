@@ -12,7 +12,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var ioschatRouter = require('./routes/ioschat');
 var aboutusRouter = require('./routes/aboutus');
-var grandkidmodelRouter = require('./routes/grandkidmodel');
+var armodelRouter = require('./routes/armodel');
 var templateRouter = require('./routes/template');
 
 var app = express();
@@ -31,7 +31,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/ioschat', ioschatRouter);
 app.use('/aboutus', aboutusRouter);
-app.use('/grandkidmodel', grandkidmodelRouter);
+app.use('/armodel', armodelRouter);
 app.use('/template', templateRouter);
 
 // catch 404 and forward to error handler
@@ -64,10 +64,10 @@ app.get('/chatBot',  function(req, res) {
   const options = {
       method: 'POST',
       // 'https://directline.botframework.com/v3/directline/tokens/generate',
-      uri: 'https://healthbotcontainersample918d.azurewebsites.net',
+      uri: 'https://perfectgrandkid2019.azurewebsites.net',
       headers: {
           // WEBCHAT_SECRET
-          'Authorization': 'Bearer ' + process.env.AHNyJNC0UCU.dOZawEmlpjFDzOmcpFZSoH2Qx5vobAK7wZ6ir-kyGoM
+          'Authorization': 'Bearer ' + process.env.AHNyJNC0UCU.LX5qOGekXa4.Dmk3sBfQcZ2IAgjK2WsW4mOFnSb-EV5nDZHzV2MjC18
       },
       json: true
   };
@@ -88,7 +88,7 @@ app.get('/chatBot',  function(req, res) {
               response['location'] = {lat: req.query.lat, long: req.query.long};
           }
           // APP_SECRET
-          const jwtToken = jwt.sign(response, process.env.zjsmcyb0vqonkzsteki4snl09gkth6);
+          const jwtToken = jwt.sign(response, process.env.x0vcfchdaabcqowbn0czna2b7k9art);
         //   jwt.userId("userID");
           res.send(jwtToken);
       })
