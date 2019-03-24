@@ -11,28 +11,36 @@
   <meta name="msapplication-TileColor" content="#da532c">
   <meta name="theme-color" content="#ffffff">
   <title>Perfect Grandkid</title>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel='stylesheet' href='/stylesheets/index.css' />
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Baloo+Chettan"> -->
 </head>
 
 <body>
-  <h1>Perfect Grandkid</h1>
-  <p>Welcome to Perfect Grandkid</p>
-  <img src="/images/eldercouple.svg" alt="logo" height="300px" />
-  <img src="/images/eldercouple_outline.svg" alt="logo_outline" height="300px" />
 
-  <iframe src="https://healthbotcontainersample918d.azurewebsites.net" height="100%" width="100%">
-  </iframe>
+  <div class="center">
 
-  <!-- <div id="bot"></div>
-  <script src="https://cdn.botframework.com/botframework-webchat/latest/botchat.js"></script>
-  <script>
-    BotChat.App({
-      directLine: { secret: direct_line_secret },
-      user: { id: 'userid' },
-      bot: { id: 'botid' },
-      resize: 'detect'
-    }, document.getElementById("bot"));
-  </script> -->
+    <div class="titleblock">
+      <img class="logo" src="/images/favicon/android-chrome-512x512.png" />
+      <div class="title">Perfect Grandkid</div>
+    </div>
+
+    <div class="chatbot">
+      <iframe src="https://healthbotcontainersample918d.azurewebsites.net">
+      </iframe>
+    </div>
+
+    <!-- <div id="bot"></div>
+    <script src="https://cdn.botframework.com/botframework-webchat/latest/botchat.js"></script>
+    <script>
+      BotChat.App({
+        directLine: { secret: direct_line_secret },
+        user: { id: 'userid' },
+        bot: { id: 'botid' },
+        resize: 'detect'
+      }, document.getElementById("bot"));
+    </script> -->
+
+  </div>
 
 </body>
 

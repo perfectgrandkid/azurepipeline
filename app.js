@@ -85,6 +85,7 @@ app.get('/chatBot',  function(req, res) {
           }
           // APP_SECRET
           const jwtToken = jwt.sign(response, process.env.zjsmcyb0vqonkzsteki4snl09gkth6);
+        //   jwt.userId("userID");
           res.send(jwtToken);
       })
       .catch(function (err) {
