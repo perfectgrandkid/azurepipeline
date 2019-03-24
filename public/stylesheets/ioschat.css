@@ -145,3 +145,7 @@ body {
     font-weight: bold;
   }
   
+  .time {
+    font-size: 0.8em;
+    color: rgb(160, 160, 160);
+  }
