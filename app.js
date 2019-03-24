@@ -1,3 +1,7 @@
+const crypto = require('crypto');
+const jwt = require("jsonwebtoken");
+const rp = require("request-promise");
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -41,5 +45,54 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
+function isUserAuthenticated(){
+  // add here the logic to verify the user is authenticated
+  return true;
+}
+
+app.get('/chatBot',  function(req, res) {
+  if (!isUserAuthenticated()) {
+      res.status(403).send();
+      return
+  }
+  const options = {
+      method: 'POST',
+      // 'https://directline.botframework.com/v3/directline/tokens/generate',
+      uri: 'https://healthbotcontainersample918d.azurewebsites.net',
+      headers: {
+          // WEBCHAT_SECRET
+          'Authorization': 'Bearer ' + process.env.AHNyJNC0UCU.dOZawEmlpjFDzOmcpFZSoH2Qx5vobAK7wZ6ir-kyGoM
+      },
+      json: true
+  };
+  rp(options)
+      .then(function (parsedBody) {
+          var userid = req.query.userId || req.cookies.userid;
+          if (!userid) {
+              userid = crypto.randomBytes(4).toString('hex');
+              res.cookie("userid", userid);
+          }
+
+          var response = {};
+          response['userId'] = userid;
+          response['userName'] = req.query.userName;
+          response['connectorToken'] = parsedBody.token;
+          response['optionalAttributes'] = {age: 33};
+          if (req.query.lat && req.query.long)  {
+              response['location'] = {lat: req.query.lat, long: req.query.long};
+          }
+          // APP_SECRET
+          const jwtToken = jwt.sign(response, process.env.zjsmcyb0vqonkzsteki4snl09gkth6);
+          res.send(jwtToken);
+      })
+      .catch(function (err) {
+          res.status(err.statusCode).send();
+          console.log("failed");
+      });
+});
+
+
 
 module.exports = app;
