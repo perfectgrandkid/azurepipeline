@@ -1,0 +1,488 @@
+{
+    "version": 3,
+    "steps": [
+      {
+        "id": "65fe361c5513-3509007085fcbfec-e7a2",
+        "type": "yesnoprompt",
+        "dataType": "boolean",
+        "designer": {
+          "xLocation": 408,
+          "yLocation": 20,
+          "next": "41fabccf4fc5-3f75c60f02c5c515-1231"
+        },
+        "text": "How are you doing? Is everything okay?",
+        "variable": "Greeting",
+        "layout": "vertical",
+        "stringId": "stringId_b5e0f2be6f09f304",
+        "targetStepId": "f1c206302fc9-fdf18f7c8f692d8e-4145",
+        "maxRetries": 1
+      },
+      {
+        "id": "41fabccf4fc5-3f75c60f02c5c515-1231",
+        "type": "yesnoprompt",
+        "dataType": "boolean",
+        "designer": {
+          "xLocation": 340,
+          "yLocation": 140,
+          "next": "18527c074d3b-a1133fa441672848-0675"
+        },
+        "text": "Oh no! Sorry to hear! What happened? :o Do you want me to call you?",
+        "variable": "callNeed",
+        "stringId": "stringId_fc58154bfa0e3e56",
+        "targetStepId": "eb51b033b9d2-b1253648db1fe94d-9d04",
+        "maxRetries": 1
+      },
+      {
+        "id": "18527c074d3b-a1133fa441672848-0675",
+        "type": "statement",
+        "designer": {
+          "xLocation": 173,
+          "yLocation": 80,
+          "next": "6d88a4655a4d-b8365dbc0ee416a1-4100"
+        },
+        "text": "Are you not feeling well? Let me pull up google to look up your symptoms ..",
+        "stringId": "stringId_0aa1e5d20a01a570"
+      },
+      {
+        "id": "cee361a86159-8768d2a8a880c380-e120",
+        "type": "prompt",
+        "dataType": "string",
+        "designer": {
+          "xLocation": 120,
+          "yLocation": 140,
+          "next": "9ff8ebbcf94e-bd222e9b1f4c8cad-922d"
+        },
+        "text": "So what is going on? What's the problem? \nLet's see if I can help?\nIll ask you a few questions, it will sound a bit official but I'm just putting the info into database, no worries :)",
+        "variable": "complaint",
+        "stringId": "stringId_3b2156fc1eabc74a",
+        "layout": "vertical"
+      },
+      {
+        "id": "eb51b033b9d2-b1253648db1fe94d-9d04",
+        "type": "statement",
+        "designer": {
+          "xLocation": 408,
+          "yLocation": 220
+        },
+        "text": "Okay, hang tight",
+        "stringId": "stringId_0aa1e5d20a01a570",
+        "layout": "vertical",
+        "attachment": [
+          {
+            "type": "HeroCard",
+            "title": "Emergency",
+            "titleStringId": "stringId_a3fa706f20bc0b78",
+            "subtitle": "Make a call",
+            "subtitleStringId": "stringId_98c8cb89d2227990",
+            "actions": [
+              {
+                "type": "call",
+                "parameter": "tel://my-number",
+                "caption": "Call Me",
+                "captionStringId": "stringId_a64caeb536e4b046"
+              },
+              {
+                "type": "call",
+                "parameter": "tell://9-11",
+                "caption": "Call Emergency",
+                "captionStringId": "stringId_f1853f0d2ecf4fb7"
+              }
+            ],
+            "image": "@{resourcesUrl} + \"/1333359.svg\""
+          }
+        ]
+      },
+      {
+        "id": "9ff8ebbcf94e-bd222e9b1f4c8cad-922d",
+        "type": "beginScenario",
+        "designer": {
+          "xLocation": 206,
+          "yLocation": 187,
+          "next": "d61a8da3aefa-debd30fbd22b530b-8385"
+        },
+        "scenario": "/healthnavigator",
+        "args": "// Pass the complaint var as input to the built in trigae\r\n${complaint}",
+        "variable": "results",
+        "label": "Start triage"
+      },
+      {
+        "id": "42bcc266ae24-4818a7f1d51a46c8-07ce",
+        "type": "statement",
+        "designer": {
+          "xLocation": 66,
+          "yLocation": 480
+        },
+        "text": "Get well soon ! I'll talk to you later!",
+        "layout": "vertical",
+        "attachment": [
+          {
+            "type": "AdaptiveCard",
+            "cardCode": "{\n  \"$schema\": \"http://adaptivecards.io/schemas/adaptive-card.json\",\n  \"type\": \"AdaptiveCard\",\n  \"version\": \"1.0\",\n  \"speak\": \"Your  meeting about \\\"Adaptive Card design session\\\" is starting at 12:30pmDo you want to snooze  or do you want to send a late notification to the attendees?\",\n  \"body\": [\n    {\n      \"type\": \"TextBlock\",\n      \"text\": \"Suggested care: \",\n      \"size\": \"large\",\n      \"weight\": \"bolder\"\n    },\n    {\n      \"type\": \"TextBlock\",\n      \"text\": ${results}.triage.recommendation,\n      \"isSubtle\": true,\n      \"spacing\": 'small',\n      \"size\": \"medium\",\n    },\n    {\n      \"type\": \"TextBlock\",\n      \"text\": '**Disposition rating:** ' + JSON.stringify(${results}.triage.rating) + ' out of 100',\n      \"isSubtle\": true,\n      \"spacing\": \"large\"\n    },\n  ],\n  \"actions\": [\n    {\n      \"type\": \"Action.Submit\",\n      \"title\": \"Schedule with a doctor?\",\n      \"data\": {\n        \"x\": \"schedule\"\n      }\n    }\n  ]\n}"
+          }
+        ],
+        "label": "Good bye for now",
+        "stringId": "stringId_b55858c064d36bb5"
+      },
+      {
+        "id": "32470dd4536d-b9926104af17df7d-afd7",
+        "type": "branch",
+        "condition": "// Low disposition is detected suggestion would be self care at home.\r\n// suggest the patient self care before connecting to the nurse line\r\n${results}.triage.rating >= 15",
+        "designer": {
+          "xLocation": 220,
+          "yLocation": 300,
+          "next": "09337a400b26-73c022425ab03118-bb0d"
+        },
+        "targetStepId": "3f699551ad21-2ee7a90a33b49ffb-6dbc",
+        "label": "Disposition filter"
+      },
+      {
+        "id": "b17e50cd8a17-d73ef431605e1d41-dcba",
+        "type": "beginScenario",
+        "designer": {
+          "xLocation": 300,
+          "yLocation": 430
+        },
+        "scenario": "/builtin/handoff",
+        "args": "// The triage results objects include Summary , Primary complaint, possible causes , triage rating & recommendation.\r\n// Any of those could be passed to the agent for a perfect route of the chatbot conversation to a human  \r\n'Triage Recommendation:' + ${results}.triage.recommendation",
+        "variable": "report"
+      },
+      {
+        "id": "3f699551ad21-2ee7a90a33b49ffb-6dbc",
+        "type": "statement",
+        "designer": {
+          "xLocation": 286,
+          "yLocation": 352,
+          "next": "b17e50cd8a17-d73ef431605e1d41-dcba"
+        },
+        "text": "Developer notice :",
+        "stringId": "stringId_743bb34c8360b206",
+        "layout": "vertical",
+        "attachment": [
+          {
+            "type": "AdaptiveCard",
+            "cardCode": "{\r\n\t\"$schema\": \"http://adaptivecards.io/schemas/adaptive-card.json\",\r\n\t\"type\": \"AdaptiveCard\",\r\n\t\"version\": \"1.0\",\r\n\t\"body\": [\r\n\t\t{\r\n\t\t\t\"type\": \"Container\",\r\n\t\t\t\"items\": [\r\n\t\t\t\t{\r\n\t\t\t\t\t\"type\": \"TextBlock\",\r\n\t\t\t\t\t\"text\": \"Transition conversations to human\",\r\n\t\t\t\t\t\"weight\": \"bolder\",\r\n\t\t\t\t\t\"size\": \"medium\"\r\n                }\r\n\t\t\t]\r\n\t\t},\r\n\t\t{\r\n\t\t\t\"type\": \"Container\",\r\n\t\t\t\"items\": [\r\n\t\t\t\t{\r\n\t\t\t\t\t\"type\": \"TextBlock\",\r\n\t\t\t\t\t\"text\": \"With Health bot handoff, you can pass conversations between bots and agents.\",\r\n\t\t\t\t\t\"wrap\": true\r\n\t\t\t\t},\r\n                {\r\n                    \"type\": \"TextBlock\",\r\n                    \"wrap\": true,\r\n                    \"text\": \"To activate the full flow check out [Handoff to live agent documentation](https://docs.microsoft.com/en-us/healthbot/handoff)\"\r\n                }\r\n\t\t\t]\r\n\t\t}\r\n\t]\r\n}"
+          }
+        ],
+        "label": "Developer notice"
+      },
+      {
+        "id": "09337a400b26-73c022425ab03118-bb0d",
+        "type": "yesnoprompt",
+        "dataType": "boolean",
+        "designer": {
+          "xLocation": 166,
+          "yLocation": 420,
+          "next": "42bcc266ae24-4818a7f1d51a46c8-07ce"
+        },
+        "text": "It seems like you'll be fine! Do you want me to call you?",
+        "variable": "connectToNurse",
+        "stringId": "stringId_9ab789177e280520",
+        "targetStepId": "3f699551ad21-2ee7a90a33b49ffb-6dbc",
+        "maxRetries": 1
+      },
+      {
+        "id": "d61a8da3aefa-debd30fbd22b530b-8385",
+        "type": "branch",
+        "condition": "// Conversation global variables denoted by @{myVar}, they persist throughout the lifespan of the conversation.\r\n// In case the triage was not successfull, ask the user to try again\r\n@{healthnavigator}!= null && @{healthnavigator}.primaryComplaint == null",
+        "designer": {
+          "xLocation": 146,
+          "yLocation": 280,
+          "next": "32470dd4536d-b9926104af17df7d-afd7",
+          "reverse": true
+        },
+        "targetStepId": "1ef75c58792c-860d908f549bee45-6981"
+      },
+      {
+        "id": "1ef75c58792c-860d908f549bee45-6981",
+        "type": "prompt",
+        "dataType": "string",
+        "designer": {
+          "xLocation": 66,
+          "yLocation": 260,
+          "next": "9ff8ebbcf94e-bd222e9b1f4c8cad-922d"
+        },
+        "text": "What symptoms do you have?",
+        "variable": "complaint",
+        "stringId": "stringId_3b2156fc1eabc74a"
+      },
+      {
+        "id": "6d88a4655a4d-b8365dbc0ee416a1-4100",
+        "label": "Wait",
+        "type": "wait",
+        "designer": {
+          "xLocation": 40,
+          "yLocation": 74,
+          "next": "cee361a86159-8768d2a8a880c380-e120"
+        },
+        "time": "500"
+      },
+      {
+        "id": "ff4091225b17-a2f55e5a37d99881-cd42",
+        "label": "Wait",
+        "type": "wait",
+        "designer": {
+          "xLocation": 533,
+          "yLocation": 200
+        },
+        "time": "1000"
+      },
+      {
+        "id": "d28c1a39b47a-3360f7c42a031242-527a",
+        "label": "Wait",
+        "type": "wait",
+        "designer": {
+          "xLocation": 880,
+          "yLocation": 220
+        },
+        "time": "1000"
+      },
+      {
+        "id": "4b7a48f83e1b-11882209cdcde191-a957",
+        "type": "prompt",
+        "dataType": "time",
+        "designer": {
+          "xLocation": 891,
+          "yLocation": 360,
+          "next": "fefe913ab241-5cca6560ec526e88-8e1e"
+        },
+        "text": "Okay, now let me know when you want to catch up! Just type day and time, you can check my google calendar too if you want",
+        "variable": "callTime",
+        "stringId": "stringId_578d42bf839d2854",
+        "layout": "vertical",
+        "attachment": [
+          {
+            "type": "HeroCard",
+            "title": "Call",
+            "titleStringId": "stringId_c3755e61202abd74",
+            "subtitle": "Let's pick some time to chat!",
+            "subtitleStringId": "stringId_9b3f9375643a96f2",
+            "actions": [
+              {
+                "type": "openUrl",
+                "parameter": "https://calendar.google.com/calendar/",
+                "caption": "Open",
+                "captionStringId": "stringId_c3bf447eabe63272"
+              }
+            ],
+            "image": "@{resourcesUrl} + \"/321287.svg\""
+          }
+        ]
+      },
+      {
+        "id": "a9322831ca23-25baf7a589253fbc-f683",
+        "type": "prompt",
+        "dataType": "[\"great\",\"okay\",\"fine\",\"not too well\"]",
+        "designer": {
+          "xLocation": 726,
+          "yLocation": 451,
+          "listStyle": 3,
+          "next": "f2d3833a6d48-de159f308dc9d23e-dcfe"
+        },
+        "text": "Great! I'll confirm with you as soon as I can! ALso, let me know how this chat went, and I'll call you back as when agreed! Love you! Bye!",
+        "variable": "appfeedback",
+        "stringId": "stringId_b3b3f7c136449d20",
+        "layout": "vertical",
+        "attachment": [
+          "@{resourcesUrl} + \"/adult-affection-baby-302083.jpg\""
+        ]
+      },
+      {
+        "id": "fefe913ab241-5cca6560ec526e88-8e1e",
+        "label": "Wait",
+        "type": "wait",
+        "designer": {
+          "xLocation": 788,
+          "yLocation": 412,
+          "next": "a9322831ca23-25baf7a589253fbc-f683"
+        },
+        "time": "1000"
+      },
+      {
+        "id": "f2d3833a6d48-de159f308dc9d23e-dcfe",
+        "type": "statement",
+        "designer": {
+          "xLocation": 626,
+          "yLocation": 500
+        },
+        "stringId": "stringId_898aa19714e95d49",
+        "layout": "vertical",
+        "attachment": [
+          {
+            "type": "HeroCard",
+            "title": "Healthy Living",
+            "titleStringId": "stringId_8fa41ff24906427a",
+            "subtitle": "Learn how to manage stress",
+            "subtitleStringId": "stringId_662527e81f78bdb0",
+            "actions": [
+              {
+                "type": "imBack",
+                "parameter": "tel://1-800-2000-5000",
+                "caption": "Call",
+                "captionStringId": "stringId_c3755e61202abd74"
+              },
+              {
+                "type": "openUrl",
+                "parameter": "https://www.heart.org/en/healthy-living/healthy-lifestyle/stress-management",
+                "caption": "Visit Website",
+                "captionStringId": "stringId_884a711f3269ae94"
+              }
+            ],
+            "image": "@{resourcesUrl} + \"/1530899.svg\""
+          }
+        ],
+        "text": "Here is a daily wellness advice! Have a great day!"
+      },
+      {
+        "id": "9353102a6b3b-4f2f17b824bbdc55-59be",
+        "type": "statement",
+        "designer": {
+          "xLocation": 800,
+          "yLocation": 260,
+          "next": "d06502158add-bd5d6242e285eb78-43ad"
+        },
+        "text": "Memory about today",
+        "layout": "vertical",
+        "attachment": [
+          {
+            "type": "HeroCard",
+            "title": "Positive Feedback About The Day",
+            "titleStringId": "stringId_9192682aa15f6903",
+            "subtitle": "Share your thoughts or pictures from today to make this day special!",
+            "subtitleStringId": "stringId_4dfd6176c403db0d",
+            "actions": [
+              {
+                "type": "openUrl",
+                "parameter": "https://penzu.com",
+                "caption": "Take notes",
+                "captionStringId": "stringId_5717d9337d9585a7"
+              },
+              {
+                "type": "downloadFile",
+                "parameter": "https://www.instagram.com",
+                "caption": "Upload a photo",
+                "captionStringId": "stringId_540d5ef71bfd1fbf"
+              }
+            ],
+            "image": "@{resourcesUrl} + \"/1554826.svg\""
+          }
+        ],
+        "stringId": "stringId_31bef473aeaf5bed"
+      },
+      {
+        "id": "a6390281095d-820eef0997e90157-24b2",
+        "type": "prompt",
+        "dataType": "string",
+        "designer": {
+          "xLocation": 740,
+          "yLocation": 170,
+          "next": "bec721df1661-3dd267ede1b1a147-ab2b"
+        },
+        "text": "How was your day? What did you do today?",
+        "variable": "fromdata",
+        "layout": "vertical",
+        "attachment": [
+          {
+            "type": "AdaptiveCard",
+            "cardCode": "{\n    \"$schema\": \"http://adaptivecards.io/schemas/adaptive-card.json\",\n    \"type\": \"AdaptiveCard\",\n    \"version\": \"0.5\",\n    \"body\": [\n        {\n            \"type\": \"Container\",\n            \"items\": [\n                {\n                    \"type\": \"Input.ChoiceSet\",\n                    \"id\": \"activity\",\n                    \"isMultiSelect\": true,\n                    \"style\": \"expanded\",\n                    \"choices\": [\n                        {\n                            \"title\": \"Went for a walk\",\n                            \"value\": \"Went for a walk\"\n                        },\n                        {\n                            \"title\": \"Stayed in\",\n                            \"value\": \"Stayed in\"\n                        },\n                        {\n                            \"title\": \"Met up with a friend\",\n                            \"value\": \"Met up with a friend\"\n                        },\n                        {\n                            \"title\": \"Read a book\",\n                            \"value\": \"Read a book\"\n                        }\n                    ]\n                }\n            ]\n        }\n    ],\n    \"actions\": [\n        {\n            \"type\": \"Action.Submit\",\n            \"title\": \"Okay\"\n        }\n    ]\n}"
+          }
+        ],
+        "stringId": "stringId_4ee73b76b5b4c5d5"
+      },
+      {
+        "id": "bec721df1661-3dd267ede1b1a147-ab2b",
+        "type": "yesnoprompt",
+        "dataType": "boolean",
+        "designer": {
+          "xLocation": 680,
+          "yLocation": 240,
+          "next": "7bd50b94351f-cf20b4f319d2ba9c-7168"
+        },
+        "text": " 'Your activity today is: ' + JSON.parse(${fromdata}).activity + '. I am really proud of you!! Do you want to make some notes about today or share pictures?'\n ",
+        "variable": "diaryEntry",
+        "stringId": "stringId_dfe9523bf4a6297a",
+        "targetStepId": "9353102a6b3b-4f2f17b824bbdc55-59be"
+      },
+      {
+        "id": "d06502158add-bd5d6242e285eb78-43ad",
+        "type": "yesnoprompt",
+        "dataType": "boolean",
+        "designer": {
+          "xLocation": 720,
+          "yLocation": 300,
+          "next": "7bd50b94351f-cf20b4f319d2ba9c-7168"
+        },
+        "variable": "calltimeok",
+        "text": "Do you want to catch up and call me sometime? I really miss you!",
+        "stringId": "stringId_65d84555deeeeec8",
+        "targetStepId": "4b7a48f83e1b-11882209cdcde191-a957"
+      },
+      {
+        "id": "f1c206302fc9-fdf18f7c8f692d8e-4145",
+        "type": "prompt",
+        "dataType": "string",
+        "designer": {
+          "xLocation": 531,
+          "yLocation": 31,
+          "next": "94e043a06b62-dc02fa7488177063-27f5"
+        },
+        "text": "How is your mood today? Pick one:",
+        "variable": "mooddata",
+        "layout": "vertical",
+        "attachment": [
+          {
+            "type": "AdaptiveCard",
+            "cardCode": "{\n    \"$schema\": \"http://adaptivecards.io/schemas/adaptive-card.json\",\n    \"type\": \"AdaptiveCard\",\n    \"version\": \"0.5\",\n    \"body\": [\n        {\n            \"type\": \"Container\",\n            \"items\": [\n                {\n                    \"type\": \"Input.ChoiceSet\",\n                    \"id\": \"mood\",\n                    \"isMultiSelect\": true,\n                    \"style\": \"expanded\",\n                    \"choices\": [\n                        {\n                            \"title\": \"Great\",\n                            \"value\": \"Great\"\n                        },\n                        {\n                            \"title\": \"I'm okay\",\n                            \"value\": \"I'm okay\"\n                        },\n                        {\n                            \"title\": \"Lonely\",\n                            \"value\": \"Lonely\"\n                        },\n                        {\n                            \"title\": \"Anxious\",\n                            \"value\": \"Anxious\"\n                        }\n                    ]\n                }\n            ]\n        }\n    ],\n    \"actions\": [\n        {\n            \"type\": \"Action.Submit\",\n            \"title\": \"Okay\"\n        }\n    ]\n}"
+          }
+        ],
+        "stringId": "stringId_4ee73b76b5b4c5d5"
+      },
+      {
+        "id": "94e043a06b62-dc02fa7488177063-27f5",
+        "type": "switch",
+        "designer": {
+          "xLocation": 653,
+          "yLocation": 40
+        },
+        "cases": [
+          {
+            "value": "default",
+            "targetStepId": ""
+          },
+          {
+            "value": "Great",
+            "targetStepId": "a6390281095d-820eef0997e90157-24b2"
+          },
+          {
+            "value": "Anxious",
+            "targetStepId": "41fabccf4fc5-3f75c60f02c5c515-1231"
+          },
+          {
+            "value": "Lonely",
+            "targetStepId": "41fabccf4fc5-3f75c60f02c5c515-1231"
+          },
+          {
+            "value": "I'm okay",
+            "targetStepId": "a6390281095d-820eef0997e90157-24b2"
+          }
+        ],
+        "condition": " JSON.parse(${mooddata}).mood "
+      },
+      {
+        "id": "7bd50b94351f-cf20b4f319d2ba9c-7168",
+        "type": "statement",
+        "designer": {
+          "xLocation": 593,
+          "yLocation": 366
+        },
+        "text": "Okay Byeeeee!! Love you!",
+        "layout": "vertical",
+        "attachment": [
+          "@{resourcesUrl} + \"/1530913.svg\""
+        ],
+        "stringId": "stringId_61af3bd17cff21f2"
+      }
+    ],
+    "interrupting": true,
+    "breaking": true,
+    "returningMessage": ""
+  }
